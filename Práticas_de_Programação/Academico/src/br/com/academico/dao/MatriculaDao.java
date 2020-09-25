@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.dao;
+package br.com.academico.dao;
 
-import br.com.web2.model.Aluno;
-import br.com.web2.util.JPAUtil;
+import br.com.academico.model.Matricula;
+import br.com.academico.util.JPAUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,15 +15,15 @@ import javax.persistence.Query;
  *
  * @author Nellson
  */
-public class AlunoDAO {
-
+public class MatriculaDao {
+    
     private EntityManager em;
 
-    public void inserir(Aluno a) throws Exception {
+    public void inserir(Matricula m) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             em.getTransaction().begin();
-            em.persist(a);
+            em.persist(m);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -34,11 +34,11 @@ public class AlunoDAO {
         }
     }
 
-    public void editar(Aluno a) throws Exception {
+    public void editar(Matricula m) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             em.getTransaction().begin();
-            em.merge(a);
+            em.merge(m);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -49,10 +49,10 @@ public class AlunoDAO {
         }
     }
     
-    public Aluno getPorId(int matricula) throws Exception {
+    public Matricula getPorId(int id) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
-            return em.find(Aluno.class, matricula);
+            return em.find(Matricula.class, id);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             throw new Exception("Erro ao consultar registro!");
@@ -61,12 +61,12 @@ public class AlunoDAO {
         }
     }
 
-    public void excluir(Aluno a) throws Exception {
+    public void excluir(Matricula m) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             em.getTransaction().begin();
-            a = em.find(Aluno.class, a.getMatricula());
-            em.remove(a);
+            m = em.find(Matricula.class, m.getId());
+            em.remove(m);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -77,10 +77,10 @@ public class AlunoDAO {
         }
     }
 
-    public List<Aluno> getLista() throws Exception {
+    public List<Matricula> getLista() throws Exception {
         try {
             em = JPAUtil.createEntityManager();
-            Query query = em.createQuery("SELECT a FROM Aluno a");
+            Query query = em.createQuery("SELECT m FROM Matricula m");
             return query.getResultList();
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -89,5 +89,4 @@ public class AlunoDAO {
             JPAUtil.closeEntityManager();
         }
     }
-
 }

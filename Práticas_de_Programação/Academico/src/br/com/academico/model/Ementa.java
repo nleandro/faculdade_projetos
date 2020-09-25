@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.model;
+package br.com.academico.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,4 +55,8 @@ public class Ementa {
         this.qtdAvaliacoes = qtdAvaliacoes;
     }
 
+    @Override
+    public String toString() {
+        return "\nEmenta: " + "Semestre: " + semestre + " - Conteúdos: " + conteudos + " - Quantidade de Avaliações: " + qtdAvaliacoes;
+    }
 }

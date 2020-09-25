@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.model;
+package br.com.academico.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -73,8 +73,8 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "Código: " + codigo + "- Nome: " + nome + "- Ministrador: " + ministrador
-                + "-Carga Hóraria: " + cargaHoraria;
+        return "Código: " + codigo + " - Nome: " + nome + " - Ministrador: " + ministrador
+                + " - Carga Hóraria: " + cargaHoraria + ementa;
 
     }
 }

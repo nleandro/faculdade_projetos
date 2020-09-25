@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.dao;
+package br.com.academico.dao;
 
-import br.com.web2.model.Curso;
-import br.com.web2.util.JPAUtil;
+import br.com.academico.model.Monitoria;
+import br.com.academico.util.JPAUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,18 +15,17 @@ import javax.persistence.Query;
  *
  * @author lucas
  */
-public class CursoDao {
-
+public class MonitoriaDao {
     private EntityManager em;
 
-    public void inserir(Curso c) throws Exception {
+    public void inserir(Monitoria m) throws Exception {
         try {
             // obter um EntityManager (Conexão)
             em = JPAUtil.createEntityManager();
             // inicar transação
             em.getTransaction().begin();
             // executar operação (salva o registro)
-            em.persist(c);
+            em.persist(m);
             // encerrar transação
             em.getTransaction().commit();
 
@@ -38,18 +37,16 @@ public class CursoDao {
             // encerrar entity manager
             JPAUtil.closeEntityManager();
         }
-
     }
 
-    public void editar(Curso c) throws Exception {
+    public void editar(Monitoria m) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             em.getTransaction().begin();
-            em.merge(c);
+            em.merge(m);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            e.printStackTrace();
             System.out.println("Erro: " + e.getMessage());
             throw new Exception("Erro ao excluir registro!");
         } finally {
@@ -57,29 +54,11 @@ public class CursoDao {
         }
     }
 
-    public void excluir(Curso c) throws Exception {
-        try {
-            em = JPAUtil.createEntityManager();
-            em.getTransaction().begin();
-            // remove o registro informado
-            c = em.find(Curso.class, c.getCodigo());
-            em.remove(c);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-            System.out.println("Erro: " + e.getMessage());
-            throw new Exception("Erro ao excluir registro!");
-        } finally {
-            JPAUtil.closeEntityManager();
-        }
-    }
-
-    public Curso getPorId(int id) throws Exception {
+    public Monitoria getPorId(int codigo) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             // realiza a busca de 1 único registro com o id especficado
-            return em.find(Curso.class, id);
+            return em.find(Monitoria.class, codigo);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             throw new Exception("Erro ao consultar registros!");
@@ -88,11 +67,29 @@ public class CursoDao {
         }
     }
 
-    public List<Curso> getLista() throws Exception {
+    public void excluir(Monitoria m) throws Exception {
+        try {
+            em = JPAUtil.createEntityManager();
+            em.getTransaction().begin();
+            // remove o registro informado
+            m = em.find(Monitoria.class, m.getCodigo());
+            em.remove(m);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
+            throw new Exception("Erro ao excluir registro!");
+        } finally {
+            JPAUtil.closeEntityManager();
+        }
+    }
+
+    public List<Monitoria> getLista() throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             // JPQL (Linguagem de COnsulta do JPA)
-            Query query = em.createQuery("SELECT c FROM Curso c");
+            Query query = em.createQuery("SELECT m FROM Monitoria m");
             return query.getResultList();
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -101,5 +98,5 @@ public class CursoDao {
             JPAUtil.closeEntityManager();
         }
     }
-
+    
 }

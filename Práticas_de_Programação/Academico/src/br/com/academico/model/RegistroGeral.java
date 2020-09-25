@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.model;
+package br.com.academico.model;
 
-import br.com.web2.util.DateUtil;
+import br.com.academico.util.DateUtil;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -67,6 +67,6 @@ public class RegistroGeral {
             dataString = DateUtil.dateToString(dataExpedicao);
         }
 
-        return "RG: " + rg + " - Data de Expedicao: " + dataString + " - Órgão Emissor: " + orgaoEmissor;
+        return "\nRegistro Geral: " + "RG: " + rg + " - Data de Expedicao: " + dataString + " - Órgão Emissor: " + orgaoEmissor;
     }
 }

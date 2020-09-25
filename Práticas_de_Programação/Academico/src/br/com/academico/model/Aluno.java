@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.model;
+package br.com.academico.model;
 
-import br.com.web2.util.DateUtil;
+import br.com.academico.util.DateUtil;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,14 +17,14 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author EDUARDA
+ * @author Nellson
  */
 @Entity
 public class Aluno {
 
     @Id
     @GeneratedValue
-    private int matricula;
+    private int id;
     private String nome;
     private String email;
     @Temporal(TemporalType.DATE)
@@ -38,12 +38,12 @@ public class Aluno {
         this.rg = new RegistroGeral();
     }
 
-    public int getMatricula() {
-        return matricula;
+    public int getId() {
+        return id;
     }
 
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -101,8 +101,9 @@ public class Aluno {
             dataString = DateUtil.dateToString(dataNascimento);
         }
 
-        return "Matrícula: " + matricula + " - Nome: " + nome + " - " + rg + " - E-mail: " + email
-                + " - Data de Nascimento: " + dataString + " - Período: " + periodo + " - Curso: " + curso;
+        return "Id: " + id + " - Nome: " + nome + " - E-mail: " + email
+                + " - Data de Nascimento: " + dataString + " - Período: " + periodo
+                + " - Curso: " + curso + rg;
     }
 
 }

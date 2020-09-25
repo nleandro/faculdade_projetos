@@ -1,4 +1,4 @@
-package br.com.web2.model;
+package br.com.academico.model;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -77,8 +77,7 @@ public class Endereco {
     
     @Override
     public String toString(){
-        return "Endereço:\n "
-                + "Rua : " + rua + " Bairro: " + bairro + " Número: " + numero + " Cidade : " + cidade + "UF: " +uf;
+        return "\nEndereço: " + "Rua: " + rua + " - Bairro: " + bairro + " - Número: " + numero + " - Cidade: " + cidade + " - UF: " + uf;
     }
     
     

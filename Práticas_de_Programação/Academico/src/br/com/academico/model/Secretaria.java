@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.model;
+package br.com.academico.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -65,7 +65,7 @@ public class Secretaria {
     @Override
     public String toString() {
         return "Cpf: " + cpf + " - Nome: " + nome + " - Salario: " + salario
-                + " Qualificacao: " + qualificacao + " - Idioma: " + idioma;
+                + " - Qualificacao: " + qualificacao + " - Idioma: " + idioma;
     }
 
 }

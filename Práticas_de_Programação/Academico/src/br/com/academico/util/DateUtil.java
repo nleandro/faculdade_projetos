@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.util;
+package br.com.academico.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

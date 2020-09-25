@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.dao;
+package br.com.academico.dao;
 
-import br.com.web2.model.Professor;
-import br.com.web2.util.JPAUtil;
+import br.com.academico.model.Secretaria;
+import br.com.academico.util.JPAUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,19 +15,16 @@ import javax.persistence.Query;
  *
  * @author EDUARDA
  */
-public class ProfessorDao {
+public class SecretariaDao {
 
     private EntityManager em;
 
-    public void inserir(Professor p) throws Exception {
+    public void inserir(Secretaria s) throws Exception {
         try {
-            // obter um EntityManager (Conexão)
+
             em = JPAUtil.createEntityManager();
-            // inicar transação
             em.getTransaction().begin();
-            // executar operação (salva o registro)
-            em.persist(p);
-            // encerrar transação
+            em.persist(s);
             em.getTransaction().commit();
 
         } catch (Exception e) {
@@ -35,47 +32,17 @@ public class ProfessorDao {
             System.out.println("Erro: " + e.getMessage());
             throw new Exception("Erro ao inserir registro!");
         } finally {
-            // encerrar entity manager
             JPAUtil.closeEntityManager();
         }
     }
 
-    public void editar(Professor p) throws Exception {
+    public void editar(Secretaria s) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             em.getTransaction().begin();
-            em.merge(p);
+            em.merge(s);
             em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            System.out.println("Erro: " + e.getMessage());
-            throw new Exception("Erro ao excluir registro!");
-        } finally {
-            JPAUtil.closeEntityManager();
-        }
-    }
 
-    public Professor getPorId(String cpf) throws Exception {
-        try {
-            em = JPAUtil.createEntityManager();
-            // realiza a busca de 1 único registro com o id especficado
-            return em.find(Professor.class, cpf);
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
-            throw new Exception("Erro ao consultar registros!");
-        } finally {
-            JPAUtil.closeEntityManager();
-        }
-    }
-
-    public void excluir(Professor p) throws Exception {
-        try {
-            em = JPAUtil.createEntityManager();
-            em.getTransaction().begin();
-            // remove o registro informado
-            p = em.find(Professor.class, p.getCpf());
-            em.remove(p);
-            em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();
@@ -86,11 +53,42 @@ public class ProfessorDao {
         }
     }
 
-    public List<Professor> getLista() throws Exception {
+    public Secretaria getPorId(String cpf) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
-            // JPQL (Linguagem de COnsulta do JPA)
-            Query query = em.createQuery("SELECT p FROM Professor p");
+            return em.find(Secretaria.class, cpf);
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            throw new Exception("Erro ao consultar registros!");
+        } finally {
+            JPAUtil.closeEntityManager();
+        }
+    }
+
+    public void excluir(Secretaria s) throws Exception {
+        try {
+            em = JPAUtil.createEntityManager();
+            em.getTransaction().begin();
+            s = em.find(Secretaria.class, s.getCpf());
+            em.remove(s);
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
+            throw new Exception("Erro ao excluir registro!");
+        } finally {
+            JPAUtil.closeEntityManager();
+        }
+    }
+
+    public List<Secretaria> getLista() throws Exception {
+        try {
+            em = JPAUtil.createEntityManager();
+
+            Query query = em.createQuery("SELECT s FROM Secretaria s");
             return query.getResultList();
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());

@@ -3,85 +3,62 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.dao;
+package br.com.academico.dao;
 
-import br.com.web2.model.Coordenador;
-import br.com.web2.util.JPAUtil;
+import br.com.academico.model.Estagio;
+import br.com.academico.util.JPAUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
  *
- * @author Nellson
+ * @author lucas
  */
-public class CoordenadorDAO {
+public class EstagioDAO {
+     private EntityManager em;
 
-    private EntityManager em;
-
-    public void inserir(Coordenador c) throws Exception {
+    public void inserir(Estagio es) throws Exception {
         try {
+            // obter um EntityManager (Conexão)
             em = JPAUtil.createEntityManager();
+            // inicar transação
             em.getTransaction().begin();
-            em.persist(c);
+            // executar operação (salva o registro)
+            em.persist(es);
+            // encerrar transação
             em.getTransaction().commit();
+
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.out.println("Erro: " + e.getMessage());
             throw new Exception("Erro ao inserir registro!");
         } finally {
+            // encerrar entity manager
             JPAUtil.closeEntityManager();
         }
     }
 
-    public void editar(Coordenador c) throws Exception {
+    public void editar(Estagio es) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
             em.getTransaction().begin();
-            em.merge(c);
+            em.merge(es);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.out.println("Erro: " + e.getMessage());
-            throw new Exception("Erro ao editar registro!");
-        } finally {
-            JPAUtil.closeEntityManager();
-        }
-    }
-    
-    public Coordenador getPorId(String cpf) throws Exception {
-        try {
-            em = JPAUtil.createEntityManager();
-            return em.find(Coordenador.class, cpf);
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
-            throw new Exception("Erro ao consultar registro!");
+            throw new Exception("Erro ao excluir registro!");
         } finally {
             JPAUtil.closeEntityManager();
         }
     }
 
-    public void excluir(Coordenador c) throws Exception {
+    public Estagio getPorId(int codigo) throws Exception {
         try {
             em = JPAUtil.createEntityManager();
-            em.getTransaction().begin();
-            c = em.find(Coordenador.class, c.getCpf());
-            em.remove(c);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            System.out.println("Erro: " + e.getMessage());
-            throw new Exception("Erro ao remover registro!");
-        } finally {
-            JPAUtil.closeEntityManager();
-        }
-    }
-
-    public List<Coordenador> getLista() throws Exception {
-        try {
-            em = JPAUtil.createEntityManager();
-            Query query = em.createQuery("SELECT c FROM Coordenador c");
-            return query.getResultList();
+            // realiza a busca de 1 único registro com o id especficado
+            return em.find(Estagio.class, codigo);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             throw new Exception("Erro ao consultar registros!");
@@ -90,4 +67,35 @@ public class CoordenadorDAO {
         }
     }
 
+    public void excluir(Estagio es) throws Exception {
+        try {
+            em = JPAUtil.createEntityManager();
+            em.getTransaction().begin();
+            // remove o registro informado
+            es = em.find(Estagio.class, es.getCodigo());
+            em.remove(es);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
+            throw new Exception("Erro ao excluir registro!");
+        } finally {
+            JPAUtil.closeEntityManager();
+        }
+    }
+
+    public List<Estagio> getLista() throws Exception {
+        try {
+            em = JPAUtil.createEntityManager();
+            // JPQL (Linguagem de COnsulta do JPA)
+            Query query = em.createQuery("SELECT e FROM Estagio e");
+            return query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            throw new Exception("Erro ao consultar registros!");
+        } finally {
+            JPAUtil.closeEntityManager();
+        }
+    }
 }

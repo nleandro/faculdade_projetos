@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.util;
+package br.com.academico.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,12 +11,11 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author Allyson
+ * @author Nellson
  */
 public class JPAUtil {
     
-    private static EntityManagerFactory emf = 
-            Persistence.createEntityManagerFactory("ProjetoWeb2PU");
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjetoWeb2PU");
     
     private static EntityManager em;
     

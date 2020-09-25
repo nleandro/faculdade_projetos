@@ -3,25 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.web2.model;
+package br.com.academico.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
- * @author Nellson
+ * @author EDUARDA
  */
 @Entity
-public class Coordenador {
+public class Professor {
 
     @Id
     private String cpf;
     private String nome;
     private String salario;
-    private String formacao;
-    private String atuacao;
+    private String titulacao;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
 
+    public Professor(){
+      endereco = new Endereco();
+    }
+    
     public String getCpf() {
         return cpf;
     }
@@ -46,25 +53,26 @@ public class Coordenador {
         this.salario = salario;
     }
 
-    public String getFormacao() {
-        return formacao;
+    public String getTitulacao() {
+        return titulacao;
     }
 
-    public void setFormacao(String formacao) {
-        this.formacao = formacao;
+    public void setTitulacao(String titulacao) {
+        this.titulacao = titulacao;
     }
 
-    public String getAtuacao() {
-        return atuacao;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setAtuacao(String atuacao) {
-        this.atuacao = atuacao;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
-
+    
     @Override
     public String toString() {
         return "Cpf: " + cpf + " - Nome: " + nome + " - Salario: " + salario
-                + " Formacao: " + formacao + " - Atuação: " + atuacao;
+                + " - Titulacao: " + titulacao + endereco;
     }
+
 }
