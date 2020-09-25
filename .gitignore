@@ -1,3 +1,9 @@
+## NetBeans ##
 */*/build
 */*/nbproject/private
 */*/dist
+
+## CodeBlocks ##
+*/*/bin
+*/*/obj
+*/*/*.layout
