@@ -1,0 +1,9 @@
+{
+  "name": "cliente-ws-correios",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "soap": "^0.31.0"
+  }
+}
