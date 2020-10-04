@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 50px;
+  text-align: center;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.form .form-value {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 30px;
+}
+
+.form .form-value input {
+  width: 100px;
+  margin-top: 5px;
+}
+
+.button {
+  width: 110px;
+  margin-bottom: 25px;
+}
+
+.result {
+  display: none;
+}
+
+.result .title {
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.result .value {
+  margin-top: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
